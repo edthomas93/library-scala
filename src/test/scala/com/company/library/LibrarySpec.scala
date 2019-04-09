@@ -5,10 +5,14 @@ import org.scalatest.Matchers._
 
 class LibrarySpec extends FunSuite {
 
-  test("printTitles returns a string of titles") {
+  test("A list of books should be returned when entering a partial title") {
     val library = new Library
-    val list: List[String] = List("Twilight", "Eclipse", "Atonement")
-    library.printTitles(list) shouldBe "Twilight, Eclipse, Atonement"
+    library.getBooksFromPartialTitle("Half-blood", Books.all) shouldBe List(Book("Harry Potter and the Half-blood Prince", "Rowling, J.K.", "ajaoshq"), Book("Harry Potter and the Half-blood Prince:Children's Edition", "Rowling, J.K.", "gdjvia"))
+  }
+
+  test("Partial titles can be searched using searchTitle giving a boolean") {
+    val library = new Library
+    library.searchTitle("Harry", "Harry Potter") shouldBe true
   }
 
 }

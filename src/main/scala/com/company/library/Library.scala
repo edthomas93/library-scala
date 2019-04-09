@@ -2,16 +2,18 @@ package com.company.library
 
 class Library {
 
-  def printTitles(books: List[String]): String = {
-    var titles = ""
+  def getBooksFromPartialTitle(partialTitle: String, books: List[Book]): List[Book] = {
+    var list = List[Book]()
     for (i <- 0 to books.size - 1) {
-      if (i == 0) {
-        titles = books(i)
-      } else {
-        titles = titles + ", " + books(i)
+      if (searchTitle(partialTitle, books(i).title)) {
+        list = books(i) :: list
       }
     }
-    titles
+    list
+  }
+
+  def searchTitle(search: String, title: String): Boolean = {
+    title contains search
   }
 
 }
