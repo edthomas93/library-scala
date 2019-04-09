@@ -5,8 +5,10 @@ import org.scalatest.Matchers._
 
 class LibrarySpec extends FunSuite {
 
-  test("some words to describe my test") {
-    "aString" shouldBe "aString"
+  test("printTitles returns a string of titles") {
+    val library = new Library
+    val list: List[String] = List("Twilight", "Eclipse", "Atonement")
+    library.printTitles(list) shouldBe "Twilight, Eclipse, Atonement"
   }
 
 }
