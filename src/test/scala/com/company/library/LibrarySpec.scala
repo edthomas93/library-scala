@@ -4,7 +4,7 @@ import org.scalatest.FunSuite
 import org.scalatest.Matchers._
 
 class LibrarySpec extends FunSuite {
-  val library = new Library
+  var library = new Library
 
   test("A list of books should be returned when entering a partial title") {
     library.getBookList("title", "Half-blood") shouldBe List(Book("Harry Potter and the Half-blood Prince", "Rowling, J.K.", "ajaoshq"), Book("Harry Potter and the Half-blood Prince:Children's Edition", "Rowling, J.K.", "gdjvia"))
@@ -26,6 +26,7 @@ class LibrarySpec extends FunSuite {
     library.getBookList("ISBN", "nxqryzuu") shouldBe List(Book("House at Riverton,The", "Morton, Kate", "nxqryzuu", false))
     library.loanBook("nxqryzuu") shouldBe true
     library.getBookList("ISBN", "nxqryzuu") shouldBe List(Book("House at Riverton,The", "Morton, Kate", "nxqryzuu", true))
+    library.loanBook("nxqryzuu") shouldBe false
   }
 
 }

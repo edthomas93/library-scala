@@ -50,16 +50,18 @@ class Library {
   }
 
   def loanBook(ISBN: String): Boolean = {
-    var loaned = false
+    var loanSuccess = false
     for (i <- 0 until books.size) {
-      if (searchParameter(ISBN, books(i).ISBN)) {
-        loaned = true
+      val result: Boolean = ISBN == books(i).ISBN
+      val onLoan: Boolean = books(i).onLoan
+      if (result && !onLoan) {
+        loanSuccess = true
         val title = books(i).title
         val author = books(i).author
         books = books.patch(i, Seq(Book(title, author, ISBN, true)), 1)
       }
     }
-    loaned
+    loanSuccess
   }
 
 }
