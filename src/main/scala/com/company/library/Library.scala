@@ -1,51 +1,65 @@
 package com.company.library
 
 class Library {
+  var books = Books.all
 
-  def getBookList(searchParameterType: String, searchString: String, books: List[Book]): List[Book] = {
+  def getBookList(searchParameterType: String, searchString: String): List[Book] = {
     if (searchParameterType == "title"){
-      titleLoop(searchString, books)
+      titleLoop(searchString)
     } else if (searchParameterType == "author") {
-      authorLoop(searchString, books)
+      authorLoop(searchString)
     } else if (searchParameterType == "ISBN") {
-      ISBNLoop(searchString, books)
+      ISBNLoop(searchString)
     } else {
       List[Book]()
     }
   }
 
-  def titleLoop(partialTitle: String, books: List[Book]): List[Book] = {
+  def titleLoop(partialTitle: String): List[Book] = {
     var list = List[Book]()
     for (i <- 0 until books.size) {
-      if (searchTitle(partialTitle, books(i).title)) {
+      if (searchParameter(partialTitle, books(i).title)) {
         list = books(i) :: list
       }
     }
     list
   }
 
-  def authorLoop(partialAuthor: String, books: List[Book]): List[Book] = {
+  def authorLoop(partialAuthor: String): List[Book] = {
     var list = List[Book]()
     for (i <- 0 until books.size) {
-      if (searchTitle(partialAuthor, books(i).author)) {
+      if (searchParameter(partialAuthor, books(i).author)) {
         list = books(i) :: list
       }
     }
     list
   }
 
-  def ISBNLoop(ISBN: String, books: List[Book]): List[Book] = {
+  def ISBNLoop(ISBN: String): List[Book] = {
     var book = List[Book]()
     for (i <- 0 until books.size) {
-      if (searchTitle(ISBN, books(i).ISBN)) {
+      if (searchParameter(ISBN, books(i).ISBN)) {
         book = books(i) :: book
       }
     }
     book
   }
 
-  def searchTitle(search: String, title: String): Boolean = {
-    title contains search
+  def searchParameter(searchValue: String, parameterValue: String): Boolean = {
+    parameterValue contains searchValue
+  }
+
+  def loanBook(ISBN: String): Boolean = {
+    var loaned = false
+    for (i <- 0 until books.size) {
+      if (searchParameter(ISBN, books(i).ISBN)) {
+        loaned = true
+        val title = books(i).title
+        val author = books(i).author
+        books = books.patch(i, Seq(Book(title, author, ISBN, true)), 1)
+      }
+    }
+    loaned
   }
 
 }

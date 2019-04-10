@@ -1,7 +1,7 @@
 package com.company.library
 
 object Books {
-  val all: List[Book] = List(
+  var all: List[Book] = List(
     Book("Da Vinci Code,The", "Brown, Dan", "pidtkl"),
     Book("Harry Potter and the Deathly Hallows", "Rowling, J.K.", "ipszbehyh"),
     Book("Harry Potter and the Philosopher's Stone", "Rowling, J.K.", "lfzowqpsj"),
@@ -105,4 +105,4 @@ object Books {
   )
 }
 
-case class Book(title: String, author: String, ISBN: String)
+case class Book(title: String, author: String, ISBN: String, onLoan: Boolean = false)

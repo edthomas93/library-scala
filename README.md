@@ -12,24 +12,32 @@
 `val library = new com.company.library.Library()`
 
 #### 4. You can then search this library by author, title or ISBN which returns a list of books:
-To search by title - `library.getBookList("title", "Harry Potter", Books.all)`
-To search by author - `library.getBookList("author", "Hislop", Books.all)`
-To search by ISBN - `library.getBookList("ISBN", "lgzf", Books.all)`
+To search by title - `library.getBookList("title", "Harry Potter")`
 
-#### 5. When finished, exit SBT by typing:
+To search by author - `library.getBookList("author", "Hislop")`
+
+To search by ISBN - `library.getBookList("ISBN", "nxqryzuu")`
+
+#### 5. You can loan out a book using the ISBN which will return true if successful:
+`library.loanBook("nxqryzuu")`
+
+#### 6. See that your book has been loaned out using getBookList:
+`library.getBookList("ISBN", "nxqryzuu")`
+
+#### 7. When finished, exit SBT by typing:
 `:quit`
 
-## Instructions
+## Task
 
 You have a library of books and are offering them to the world - you are lending so many books now that it is becoming hard to keep track of what you have.  You decided to use your programming fu to build an application which can keep track of them for you.
 
 
 ## Requirements
 
-* implements the user stories listed below (optional ones not required)
-* compiles
-* has tests
-* frequent commits
+* Implements the user stories listed below (optional ones not required)
+* Compiles
+* Has tests
+* Frequent commits
 
 ## User Stories
 
