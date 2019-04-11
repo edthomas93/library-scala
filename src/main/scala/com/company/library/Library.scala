@@ -38,7 +38,7 @@ class Library {
   def ISBNLoop(ISBN: String): List[Book] = {
     var book = List[Book]()
     for (i <- 0 until books.size) {
-      if (searchParameter(ISBN, books(i).ISBN)) {
+      if (ISBN == books(i).ISBN) {
         book = books(i) :: book
       }
     }
@@ -54,11 +54,12 @@ class Library {
     for (i <- 0 until books.size) {
       val result: Boolean = ISBN == books(i).ISBN
       val onLoan: Boolean = books(i).onLoan
-      if (result && !onLoan) {
+      val reference: Boolean = books(i).reference
+      if (result && !onLoan && !reference) {
         loanSuccess = true
         val title = books(i).title
         val author = books(i).author
-        books = books.patch(i, Seq(Book(title, author, ISBN, true)), 1)
+        books = books.patch(i, Seq(Book(title, author, ISBN, reference, true)), 1)
       }
     }
     loanSuccess
