@@ -1,7 +1,6 @@
 package com.company.library
 
-class Library {
-  var books = Books.all
+class Library(var books: List[Book] = Books.all) {
 
   def getBookList(searchParameterType: String, searchString: String): List[Book] = {
     if (searchParameterType == "title"){
