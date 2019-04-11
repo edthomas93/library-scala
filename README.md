@@ -5,26 +5,32 @@
 #### 1. Open your terminal and clone the repository:
 `git clone git@github.com:edthomas93/library-scala.git`
 
-#### 2. Access the root of the project in the command line and type:
+#### 2. Access the root of the project in the command line and run tests by typing:
+`sbt test`
+
+#### 3. Use the code to have your own virtual library by typing:
 `sbt console`
 
-#### 3. Within the console create a new instance of a library by typing:
-`val library = new com.company.library.Library()`
+#### 4. Within the console create a new instance of a library by typing:
+`val library = new com.company.library.Library`
 
-#### 4. You can then search this library by author, title or ISBN which returns a list of books:
-To search by title - `library.getBookList("title", "Harry Potter")`
+#### 5. You can then search this library by author, title or ISBN which returns a list of books:
+To search by title - `library.viewList("title", "Harry Potter")`
 
-To search by author - `library.getBookList("author", "Hislop")`
+To search by author - `library.viewList("author", "Hislop")`
 
-To search by ISBN - `library.getBookList("ISBN", "nxqryzuu")`
+To search by ISBN - `library.viewList("ISBN", "nxqryzuu")`
 
-#### 5. You can loan out a book using the ISBN which will return true if successful:
+#### 6. To loan out a book use the ISBN (which will return true if successful):
 `library.loanBook("nxqryzuu")`
 
-#### 6. See that your book has been loaned out using getBookList:
-`library.getBookList("ISBN", "nxqryzuu")`
+#### 7. See that this book has been loaned out using getBookList (will return true if on loan):
+`library.viewList("ISBN", "nxqryzuu")`
 
-#### 7. When finished, exit SBT by typing:
+#### 8. Return this book using the ISBN (will return true if successful):
+`library.returnBook("nxqryzuu")`
+
+#### 9. When finished, exit SBT by typing:
 `:quit`
 
 ## Task

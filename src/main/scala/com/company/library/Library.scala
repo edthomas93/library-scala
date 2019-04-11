@@ -2,6 +2,15 @@ package com.company.library
 
 class Library(var books: List[Book] = Books.all) {
 
+  def viewList(searchParameter: String, searchString: String): String = {
+    var prettyList = ""
+    val list = getBookList(searchParameter, searchString)
+    for (i <- 0 until list.size) {
+      prettyList += (i + 1) + ") Title: " + list(i).title + ", Author: " + list(i).author + ", ISBN: " + list(i).ISBN + ", Available: " + !list(i).onLoan + "\n"
+    }
+    prettyList
+  }
+
   def getBookList(searchParameterType: String, searchString: String): List[Book] = {
     if (searchParameterType == "title"){
       titleLoop(searchString)

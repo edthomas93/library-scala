@@ -15,6 +15,10 @@ class LibrarySpec extends FunSuite with BeforeAndAfterEach {
     library = new Library(testBooks)
   }
 
+  test("View list allows books to be returned in readable manner") {
+    library.viewList("title", "of") shouldBe "1) Title: Jamie's Ministry of Food:Anyone Can Learn to Cook in 24 Hours, Author: Oliver, Jamie, ISBN: foacwdyi, Available: true\n2) Title: Lost Boy,The:A Foster Child's Search for the Love of a Family, Author: Pelzer, Dave, ISBN: dsrzkqjsp, Available: true\n"
+  }
+
   test("A list of books should be returned when entering a partial title") {
     library.getBookList("title", "Lost Boy") shouldBe List(Book("Lost Boy,The:A Foster Child's Search for the Love of a Family", "Pelzer, Dave", "dsrzkqjsp"))
   }
