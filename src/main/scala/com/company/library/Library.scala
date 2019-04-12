@@ -5,10 +5,16 @@ class Library(var books: List[Book] = Books.all) {
   var loanedBooks: List[Loaned] = Books.loaned
 
   def viewList(searchParameter: String, searchString: String): String = {
+    if (searchParameter != "title") if (searchParameter != "author") if (searchParameter != "ISBN") {
+      return "Please enter either title, author or ISBN as a string for the first argument"
+    }
     var prettyList = ""
     val list = getBookList(searchParameter, searchString)
     for (i <- list.indices) {
       prettyList += (i + 1) + ") Title: " + list(i).title + ", Author: " + list(i).author + ", ISBN: " + list(i).ISBN + ", Available: " + !list(i).onLoan + "\n"
+    }
+    if (prettyList == "") {
+      prettyList = "No matching results"
     }
     prettyList
   }
@@ -79,7 +85,8 @@ class Library(var books: List[Book] = Books.all) {
       val onLoan: Boolean = books(i).onLoan
       if (result && onLoan) {
         returnSuccess = true
-        books = books.patch(i, Seq(Book(books(i).title, books(i).author, ISBN, books(i).reference)), 1)
+        val returnedBook = Book(books(i).title, books(i).author, ISBN, books(i).reference)
+        books = books.patch(i, Seq(returnedBook), 1)
       }
     }
     if(returnSuccess) {
@@ -91,7 +98,5 @@ class Library(var books: List[Book] = Books.all) {
     }
     returnSuccess
   }
-
-
 
 }

@@ -101,9 +101,7 @@ object Books {
     Book("Happy Days with the Naked Chef", "Oliver, Jamie", "dyoqtx"),
     Book("Hunger Games,The:Hunger Games Trilogy", "Collins, Suzanne", "dbfflaxab"),
     Book("Lost Boy,The:A Foster Child's Search for the Love of a Family", "Pelzer, Dave", "dsrzkqjsp"),
-    Book("Jamie's Ministry of Food:Anyone Can Learn to Cook in 24 Hours", "Oliver, Jamie", "foacwdyi"),
-    Book("Encyclopedia", "Various", "ukahsds", true),
-    Book("The Oxford English Dictionary", "Various", "aoiwjdw", true)
+    Book("Jamie's Ministry of Food:Anyone Can Learn to Cook in 24 Hours", "Oliver, Jamie", "foacwdyi")
   )
 
   val loaned: List[Loaned] = List()

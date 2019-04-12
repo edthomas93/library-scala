@@ -19,6 +19,11 @@ class LibrarySpec extends FunSuite with BeforeAndAfterEach {
     library.viewList("title", "of") shouldBe "1) Title: Jamie's Ministry of Food:Anyone Can Learn to Cook in 24 Hours, Author: Oliver, Jamie, ISBN: foacwdyi, Available: true\n2) Title: Lost Boy,The:A Foster Child's Search for the Love of a Family, Author: Pelzer, Dave, ISBN: dsrzkqjsp, Available: true\n"
   }
 
+  test("View list notifies user if used incorrectly or no results") {
+    library.viewList("tital", "of") shouldBe "Please enter either title, author or ISBN as a string for the first argument"
+    library.viewList("title", "Obscure Title") shouldBe "No matching results"
+  }
+
   test("View loaned shows list of loaned books in readable manner") {
     library.loanBook("dsrzkqjsp", "John Doe")
     library.viewLoaned shouldBe "1) Book(Lost Boy,The:A Foster Child's Search for the Love of a Family,Pelzer, Dave,dsrzkqjsp,false,true), Loanee: John Doe\n"
