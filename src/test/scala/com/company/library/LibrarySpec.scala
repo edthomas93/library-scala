@@ -19,6 +19,11 @@ class LibrarySpec extends FunSuite with BeforeAndAfterEach {
     library.viewList("title", "of") shouldBe "1) Title: Jamie's Ministry of Food:Anyone Can Learn to Cook in 24 Hours, Author: Oliver, Jamie, ISBN: foacwdyi, Available: true\n2) Title: Lost Boy,The:A Foster Child's Search for the Love of a Family, Author: Pelzer, Dave, ISBN: dsrzkqjsp, Available: true\n"
   }
 
+  test("View loaned shows list of loaned books in readable manner") {
+    library.loanBook("dsrzkqjsp", "John Doe")
+    library.viewLoaned shouldBe "1) Book(Lost Boy,The:A Foster Child's Search for the Love of a Family,Pelzer, Dave,dsrzkqjsp,false,true), Loanee: John Doe\n"
+  }
+
   test("A list of books should be returned when entering a partial title") {
     library.getBookList("title", "Lost Boy") shouldBe List(Book("Lost Boy,The:A Foster Child's Search for the Love of a Family", "Pelzer, Dave", "dsrzkqjsp"))
   }
@@ -35,13 +40,18 @@ class LibrarySpec extends FunSuite with BeforeAndAfterEach {
     library.searchParameter("Harry", "Harry Potter") shouldBe true
   }
 
-  test("If book loaned successfully loanBook returns true and onLoan parameter changes from true to false") {
-    library.loanBook("dsrzkqjsp") shouldBe true
-    library.loanBook("dsrzkqjsp") shouldBe false
+  test("If book loaned successfully loanBook returns true, if unsuccessful false") {
+    library.loanBook("dsrzkqjsp", "name") shouldBe true
+    library.loanBook("dsrzkqjsp", "name") shouldBe false
+  }
+
+  test("Book is added to a loanedBooks with loanee's name when loaned out") {
+    library.loanBook("dsrzkqjsp", "name")
+    library.loanedBooks shouldBe List(Loaned(Book("Lost Boy,The:A Foster Child's Search for the Love of a Family", "Pelzer, Dave", "dsrzkqjsp", false, true), "name"))
   }
 
   test("Reference books cannot be loaned out") {
-    library.loanBook("ukahsds") shouldBe false
+    library.loanBook("ukahsds", "name") shouldBe false
   }
 
   test("A book cannot be returned if not on loan") {
@@ -49,7 +59,7 @@ class LibrarySpec extends FunSuite with BeforeAndAfterEach {
   }
 
   test("A book can be returned once it's been loaned out") {
-    library.loanBook("dsrzkqjsp") shouldBe true
+    library.loanBook("dsrzkqjsp", "name") shouldBe true
     library.returnBook("dsrzkqjsp") shouldBe true
     library.getBookList("ISBN", "dsrzkqjsp") shouldBe List(Book("Lost Boy,The:A Foster Child's Search for the Love of a Family", "Pelzer, Dave", "dsrzkqjsp", false, false))
   }

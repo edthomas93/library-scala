@@ -105,6 +105,10 @@ object Books {
     Book("Encyclopedia", "Various", "ukahsds", true),
     Book("The Oxford English Dictionary", "Various", "aoiwjdw", true)
   )
+
+  val loaned: List[Loaned] = List()
 }
 
 case class Book(title: String, author: String, ISBN: String, reference: Boolean = false, onLoan: Boolean = false)
+
+case class Loaned(book: Book, loanee: String)

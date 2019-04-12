@@ -21,13 +21,13 @@ To search by author - `library.viewList("author", "Hislop")`
 
 To search by ISBN - `library.viewList("ISBN", "nxqryzuu")`
 
-#### 6. To loan out a book use the ISBN (which will return true if successful):
-`library.loanBook("nxqryzuu")`
+#### 6. To loan out a book use the ISBN and enter the name of the loanee (which will return true if successful):
+`library.loanBook("nxqryzuu", "John Doe")`
 
-#### 7. See that this book has been loaned out using getBookList (will return true if on loan):
-`library.viewList("ISBN", "nxqryzuu")`
+#### 7. See all loaned out books using viewLoaned:
+`library.viewLoaned`
 
-#### 8. Return this book using the ISBN (will return true if successful):
+#### 8. Return books using the ISBN (will return true if successful):
 `library.returnBook("nxqryzuu")`
 
 #### 9. When finished, exit SBT by typing:
