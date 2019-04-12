@@ -82,7 +82,16 @@ class Library(var books: List[Book] = Books.all) {
         books = books.patch(i, Seq(Book(books(i).title, books(i).author, ISBN, books(i).reference)), 1)
       }
     }
+    if(returnSuccess) {
+      for (i <- loanedBooks.indices) {
+        if(ISBN == loanedBooks(i).book.ISBN) {
+          loanedBooks = loanedBooks.patch(loanedBooks.indexOf(i), List(), 1)
+        }
+      }
+    }
     returnSuccess
   }
+
+
 
 }

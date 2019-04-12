@@ -64,4 +64,11 @@ class LibrarySpec extends FunSuite with BeforeAndAfterEach {
     library.getBookList("ISBN", "dsrzkqjsp") shouldBe List(Book("Lost Boy,The:A Foster Child's Search for the Love of a Family", "Pelzer, Dave", "dsrzkqjsp", false, false))
   }
 
+  test("Once a book is returned it should be removed from the loanedBooks list") {
+    library.loanBook("dsrzkqjsp", "name")
+    library.loanedBooks shouldBe List(Loaned(Book("Lost Boy,The:A Foster Child's Search for the Love of a Family","Pelzer, Dave","dsrzkqjsp",false,true),"name"))
+    library.returnBook("dsrzkqjsp")
+    library.loanedBooks shouldBe List()
+  }
+
 }
