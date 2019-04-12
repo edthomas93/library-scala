@@ -6,7 +6,7 @@ class Library(var books: List[Book] = Books.all) {
 
   def viewList(searchParameter: String, searchString: String): String = {
     if (searchParameter != "title") if (searchParameter != "author") if (searchParameter != "ISBN") {
-      return "Please enter either title, author or ISBN as a string for the first argument"
+      throw new Exception("Please enter either title, author or ISBN as a string for the first argument")
     }
     var prettyList = ""
     val list = getBookList(searchParameter, searchString)
@@ -14,7 +14,7 @@ class Library(var books: List[Book] = Books.all) {
       prettyList += (i + 1) + ") Title: " + list(i).title + ", Author: " + list(i).author + ", ISBN: " + list(i).ISBN + ", Available: " + !list(i).onLoan + "\n"
     }
     if (prettyList == "") {
-      prettyList = "No matching results"
+      throw new Exception ("No matching results")
     }
     prettyList
   }

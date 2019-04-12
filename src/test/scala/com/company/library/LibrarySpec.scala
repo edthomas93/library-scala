@@ -19,9 +19,18 @@ class LibrarySpec extends FunSuite with BeforeAndAfterEach {
     library.viewList("title", "of") shouldBe "1) Title: Jamie's Ministry of Food:Anyone Can Learn to Cook in 24 Hours, Author: Oliver, Jamie, ISBN: foacwdyi, Available: true\n2) Title: Lost Boy,The:A Foster Child's Search for the Love of a Family, Author: Pelzer, Dave, ISBN: dsrzkqjsp, Available: true\n"
   }
 
-  test("View list notifies user if used incorrectly or no results") {
-    library.viewList("tital", "of") shouldBe "Please enter either title, author or ISBN as a string for the first argument"
-    library.viewList("title", "Obscure Title") shouldBe "No matching results"
+  test("View list notifies user if no results") {
+    val exception = intercept[Exception] {
+      library.viewList("title", "Obscure Title")
+    }
+    exception.getMessage shouldBe "No matching results"
+  }
+
+  test("View list notifies user if entered incorrect search parameter") {
+    val exception = intercept[Exception] {
+      library.viewList("tital", "of")
+    }
+    exception.getMessage shouldBe "Please enter either title, author or ISBN as a string for the first argument"
   }
 
   test("View loaned shows list of loaned books in readable manner") {
